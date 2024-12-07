@@ -1,4 +1,3 @@
-import ThemeToggle from "@/lib/ThemeToggle/ThemeToggle";
 import { Separator } from "../ui/separator";
 import { SidebarTrigger } from "../ui/sidebar";
 import Breadcrumbs from "./Breadcrumbs";
@@ -15,7 +14,6 @@ const Header = () => {
 
       <div className="flex items-center gap-2 px-4">
         <User />
-        <ThemeToggle />
       </div>
     </header>
   );
