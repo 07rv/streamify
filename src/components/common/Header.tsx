@@ -1,6 +1,7 @@
 import { Separator } from "../ui/separator";
 import { SidebarTrigger } from "../ui/sidebar";
 import Breadcrumbs from "./Breadcrumbs";
+import User from "./User";
 
 const Header = () => {
   return (
@@ -11,13 +12,9 @@ const Header = () => {
         <Breadcrumbs />
       </div>
 
-      {/* <div className="flex items-center gap-2 px-4">
-        <div className="hidden md:flex">
-          <SearchInput />
-        </div>
-        <UserNav />
-        <ThemeToggle />
-      </div> */}
+      <div className="flex items-center gap-2 px-4">
+        <User />
+      </div>
     </header>
   );
 };
