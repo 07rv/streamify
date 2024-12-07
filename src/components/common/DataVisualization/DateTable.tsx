@@ -208,7 +208,7 @@ const DateTable = () => {
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline" className="ml-auto m-2">
               Columns <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
