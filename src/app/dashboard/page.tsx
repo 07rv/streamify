@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <PageContainer>
       <div className="space-y-2">
-        <div className="flex items-center justify-between space-y-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
           <h2 className="text-2xl font-bold tracking-tight">Rohit Verma</h2>
           <DateDateRange />
         </div>

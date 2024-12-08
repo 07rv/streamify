@@ -32,10 +32,8 @@ import {
 
 import {
   BadgeCheck,
-  Bell,
   ChevronRight,
   ChevronsUpDown,
-  CreditCard,
   GalleryVerticalEnd,
   LogOut,
 } from "lucide-react";
@@ -46,7 +44,7 @@ import { usePathname } from "next/navigation";
 import { Icons } from "@/lib/icons";
 
 export const company = {
-  name: "Acme Inc",
+  name: "Streamify",
   logo: GalleryVerticalEnd,
   plan: "Enterprise",
 };
@@ -175,15 +173,7 @@ const AppSidebar = () => {
                 <DropdownMenuGroup>
                   <DropdownMenuItem>
                     <BadgeCheck />
-                    Account
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <CreditCard />
-                    Billing
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Bell />
-                    Notifications
+                    Profile
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
