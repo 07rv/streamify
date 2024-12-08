@@ -98,7 +98,7 @@ const PieGraph = () => {
                   dominantBaseline={props.dominantBaseline}
                   fill="hsla(var(--foreground))"
                 >
-                  {payload.revenue}
+                  Revenue: {payload.revenue}
                 </text>
               )}
             >

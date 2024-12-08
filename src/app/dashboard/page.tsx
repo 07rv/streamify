@@ -38,6 +38,12 @@ export default function Home() {
               <div className="col-span-4">
                 <BarGraph />
               </div>
+              <div className="col-span-4 md:col-span-3">
+                <PieGraph />
+              </div>
+              <div className="col-span-4">
+                <LineGraph />
+              </div>
               <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
                   <CardTitle>Recent Sales</CardTitle>
@@ -49,12 +55,6 @@ export default function Home() {
                   <DateTable />
                 </CardContent>
               </Card>
-              <div className="col-span-4">
-                <LineGraph />
-              </div>
-              <div className="col-span-4 md:col-span-3">
-                <PieGraph />
-              </div>
             </div>
           </TabsContent>
         </Tabs>
