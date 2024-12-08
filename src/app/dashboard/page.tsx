@@ -1,9 +1,8 @@
-import AreaGraph from "@/components/common/DataVisualization/AreaGraph";
 import BarGraph from "@/components/common/DataVisualization/BarGraph";
 import DataMatrix from "@/components/common/DataVisualization/DataMatrix";
 import DateTable from "@/components/common/DataVisualization/DateTable";
+import LineGraph from "@/components/common/DataVisualization/LineGraph";
 import PieGraph from "@/components/common/DataVisualization/PieGraph";
-import RecentSales from "@/components/common/DataVisualization/RecentSales";
 import DateDateRange from "@/components/common/DateDateRange";
 import {
   Card,
@@ -51,7 +50,7 @@ export default function Home() {
                 </CardContent>
               </Card>
               <div className="col-span-4">
-                <AreaGraph />
+                <LineGraph />
               </div>
               <div className="col-span-4 md:col-span-3">
                 <PieGraph />
