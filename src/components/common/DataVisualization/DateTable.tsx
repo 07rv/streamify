@@ -205,12 +205,12 @@ const DateTable = () => {
   return (
     <Card className="col-span-4 md:col-span-3">
       <CardHeader>
-        <CardTitle>Recent Sales</CardTitle>
-        <CardDescription>You made 265 sales this month.</CardDescription>
+        <CardTitle>Recent Songs</CardTitle>
+        <CardDescription>Total: 1234567</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="w-full">
-          <div className="flex items-center py-4">
+          <div className="flex items-center py-2">
             <Input
               placeholder="Filter emails..."
               value={
