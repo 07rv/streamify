@@ -13,10 +13,10 @@ import { Button } from "@/components/ui/button";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { useState } from "react";
-import { useToggleSideBarStore } from "@/store/store";
+import { useDateTimeRangeStore } from "@/store/store";
 
 const DateDateRange = () => {
-  const { state, setDateTimeRange } = useToggleSideBarStore();
+  const { state, setDateTimeRange } = useDateTimeRangeStore();
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(state.startDate),
     to: new Date(state.endDate),
