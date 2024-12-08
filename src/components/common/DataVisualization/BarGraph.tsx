@@ -1,8 +1,6 @@
 "use client";
 
-import * as React from "react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
-
 import {
   Card,
   CardContent,
@@ -16,37 +14,35 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useDateTimeRangeStore } from "@/store/store";
+import { useDateTimeRangeStore, useSongStreamStore } from "@/store/store";
 import { format } from "date-fns";
+import { useMemo } from "react";
 
-const chartData = [
-  { name: "song1", desktop: 222, artist: "1" },
-  { name: "song2", desktop: 97, artist: "2" },
-  { name: "song3", desktop: 167, artist: "3" },
-  { name: "song4", desktop: 242, artist: "4" },
-  { name: "song5", desktop: 373, artist: "5" },
-];
-
-const chartConfig = {
-  views: {
-    label: "Streams",
-  },
-  desktop: {
-    label: "Desktop",
-  },
-} satisfies ChartConfig;
+const chartConfig: ChartConfig = {
+  views: { label: "Streams" },
+  desktop: { label: "Desktop" },
+};
 
 const BarGraph = () => {
-  const { state } = useDateTimeRangeStore();
+  const { state: dateTimeRange } = useDateTimeRangeStore();
+  const { state: streamsList } = useSongStreamStore();
+
+  const formattedDateRange = useMemo(
+    () =>
+      `${format(dateTimeRange?.startDate, "dd MMM yyyy")} - ${format(
+        dateTimeRange?.endDate,
+        "dd MMM yyyy"
+      )}`,
+    [dateTimeRange]
+  );
 
   return (
     <Card>
-      <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
-        <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
+      <CardHeader className="flex flex-col sm:flex-row items-stretch border-b p-0">
+        <div className="flex-1 flex flex-col justify-center gap-1 px-6 py-5 sm:py-6">
           <CardTitle>Top 5 Streamed Songs</CardTitle>
           <CardDescription>
-            Showing top Streamed form {format(state?.startDate, "dd MMM yyyy")}{" "}
-            - {format(state?.endDate, "dd MMM yyyy")}
+            Showing top streamed from {formattedDateRange}
           </CardDescription>
         </div>
       </CardHeader>
@@ -56,36 +52,30 @@ const BarGraph = () => {
           className="aspect-auto h-[280px] w-full"
         >
           <BarChart
+            data={streamsList.songs}
+            margin={{ left: 12, right: 12 }}
             accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="name"
+              dataKey="songName"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
               minTickGap={32}
-              tickFormatter={(value) => value}
             />
             <ChartTooltip
               content={
                 <ChartTooltipContent
                   className="w-[150px]"
                   nameKey="views"
-                  labelFormatter={(value) => {
-                    return value;
-                  }}
+                  labelFormatter={(value) => value}
                 />
               }
             />
-            <Bar radius={6} dataKey="desktop" fill={"gray"}>
+            <Bar dataKey="streams" fill="gray" radius={6}>
               <LabelList
-                dataKey="desktop"
+                dataKey="streams"
                 position="center"
                 offset={8}
                 className="fill-slate-200"
