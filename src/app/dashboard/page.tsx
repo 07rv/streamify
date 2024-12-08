@@ -4,13 +4,7 @@ import DateTable from "@/components/common/DataVisualization/DateTable";
 import LineGraph from "@/components/common/DataVisualization/LineGraph";
 import PieGraph from "@/components/common/DataVisualization/PieGraph";
 import DateDateRange from "@/components/common/DateDateRange";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardDescription,
-} from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PageContainer from "@/lib/PageContainer";
 
@@ -44,17 +38,9 @@ export default function Home() {
               <div className="col-span-4">
                 <LineGraph />
               </div>
-              <Card className="col-span-4 md:col-span-3">
-                <CardHeader>
-                  <CardTitle>Recent Sales</CardTitle>
-                  <CardDescription>
-                    You made 265 sales this month.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <DateTable />
-                </CardContent>
-              </Card>
+              <div className="col-span-4 md:col-span-3">
+                <DateTable />
+              </div>
             </div>
           </TabsContent>
         </Tabs>
