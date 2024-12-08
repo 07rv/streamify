@@ -3,6 +3,7 @@ import BarGraph from "@/components/common/DataVisualization/BarGraph";
 import DateTable from "@/components/common/DataVisualization/DateTable";
 import PieGraph from "@/components/common/DataVisualization/PieGraph";
 import RecentSales from "@/components/common/DataVisualization/RecentSales";
+import DateDateRange from "@/components/common/DateDateRange";
 import {
   Card,
   CardHeader,
@@ -18,9 +19,8 @@ export default function Home() {
     <PageContainer>
       <div className="space-y-2">
         <div className="flex items-center justify-between space-y-2">
-          <h2 className="text-2xl font-bold tracking-tight">
-            Hi, Welcome back
-          </h2>
+          <h2 className="text-2xl font-bold tracking-tight">Rohit Verma</h2>
+          <DateDateRange />
         </div>
 
         <Tabs defaultValue="overview" className="space-y-4">
