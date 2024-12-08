@@ -55,9 +55,9 @@ export const useDataMatrixStore = create<DataMatrixType>()((set) => ({
     activeUser: 0,
     totalStream: 0,
     revenue: {
-      totalRevenue: 0,
-      subscriptions: 0,
-      advertisements: 0,
+      totalRevenue: 475,
+      subscriptions: 200,
+      advertisements: 275,
     },
     topArtist: {
       name: "#####",
