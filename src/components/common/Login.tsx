@@ -41,7 +41,7 @@ const Login = () => {
   };
 
   const checkAndSetValidationsErrors = () => {
-    var hasError = false;
+    let hasError = false;
     Object.keys(inputField).map((field) => {
       if (field === "email") {
         if (inputField[field] === "") {
