@@ -1,11 +1,20 @@
 "use client";
 
 import { AudioLines } from "lucide-react";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
-  //const router = useRouter();
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/dashboard");
+    }
+  });
 
   const [inputField, setInputField] = useState({
     email: "testlogin@gmail.com",
@@ -46,15 +55,15 @@ const Login = () => {
 
   const submitButton = async () => {
     if (!checkAndSetValidationsErrors()) {
-      //   const status = await signIn("credentials", {
-      //     redirect: false,
-      //     email: inputField.email,
-      //     callbackUrl: "/",
-      //   });
-      //   if (status.ok) {
-      //     router.push(status.url);
-      //   } else {
-      //   }
+      const status = await signIn("credentials", {
+        redirect: false,
+        email: inputField.email,
+        callbackUrl: "/dashboard",
+      });
+      if (status && status.ok && status.url) {
+        router.push(status.url);
+      } else {
+      }
     }
   };
   return (
