@@ -41,132 +41,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useSongStore } from "@/store/store";
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    stream: 316,
-    songName: "wedfrgt",
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    stream: 316,
-    songName: "wedfrgt",
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "m5gr84i9",
-    songName: "wedfrgt",
-    stream: 316,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "3u1reuv4",
-    songName: "wedfrgt",
-    stream: 242,
-
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "derv1ws0",
-    songName: "rohit",
-    stream: 837,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "5kma53ae",
-    songName: "wedfrgt",
-    stream: 874,
-
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-  {
-    id: "bhqecj4p",
-    songName: "wedfrgt",
-    stream: 721,
-    artist: "sdfg",
-    dateStreamed: "22/11/2023",
-  },
-];
-
-export type Payment = {
+export type Song = {
   id: string;
   stream: number;
   songName: string;
@@ -174,7 +51,7 @@ export type Payment = {
   dateStreamed: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Song>[] = [
   {
     accessorKey: "songName",
     header: ({ column }) => {
@@ -219,6 +96,8 @@ export const columns: ColumnDef<Payment>[] = [
 ];
 
 const DateTable = () => {
+  const { state } = useSongStore();
+  const data = state.songs;
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
