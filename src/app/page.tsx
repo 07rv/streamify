@@ -1,3 +1,5 @@
+import Login from "@/components/common/Login";
+
 export default function Home() {
-  return <h1>sdf</h1>;
+  return <Login />;
 }
