@@ -137,8 +137,8 @@ const generateRandomSongList = (id: number) => {
 
 export const generateDummySongs = () => {
   const { setSongs } = useSongStore.getState();
-
-  const dummySongs = Array.from({ length: 20 }, (_, i) =>
+  const randomNumber = Math.floor(Math.random() * (35 - 10 + 1)) + 10;
+  const dummySongs = Array.from({ length: randomNumber }, (_, i) =>
     generateRandomSongList(i + 1)
   ); // Generate 10 songs
 

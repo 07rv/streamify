@@ -168,7 +168,7 @@ const DateTable = () => {
     <Card className="col-span-4 md:col-span-3">
       <CardHeader>
         <CardTitle>Recent Songs</CardTitle>
-        <CardDescription>Total: 1234567</CardDescription>
+        <CardDescription>Total: {data.length}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="w-full">
