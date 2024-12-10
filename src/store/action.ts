@@ -1,4 +1,4 @@
-import { useDateTimeRangeStore, useDataMatrixStore } from "./store";
+import { useDataMatrixStore, useSongStreamStore } from "./store";
 
 export const generateDummyMatrixData = async () => {
   const { state, setUsers, setTotalStream, setRevenue, setTopArtist } =
@@ -21,4 +21,49 @@ export const generateDummyMatrixData = async () => {
   setTotalStream(totalStream);
   setRevenue({ totalRevenue, subscriptions, advertisements });
   setTopArtist(topArtist);
+};
+
+const generateRandomSong = (id: number) => {
+  const songNames = [
+    "Shape of You",
+    "Blinding Lights",
+    "Levitating",
+    "Stay",
+    "Bad Bunny",
+    "Peaches",
+    "Good 4 U",
+    "Save Your Tears",
+    "Kiss Me More",
+    "MONTERO",
+  ];
+
+  const artists = [
+    "Ed Sheeran",
+    "The Weeknd",
+    "Dua Lipa",
+    "Justin Bieber",
+    "Bad Bunny",
+    "Olivia Rodrigo",
+    "Doja Cat",
+    "Lil Nas X",
+  ];
+
+  return {
+    id,
+    songName: songNames[Math.floor(Math.random() * songNames.length)],
+    artist: artists[Math.floor(Math.random() * artists.length)],
+    streams: (Math.floor(Math.random() * 50000) + 10000).toString(), // Random streams between 10,000 and 60,000
+  };
+};
+
+export const generateDummySongStream = async () => {
+  const { setSongs } = useSongStreamStore.getState();
+
+  // Generate random songs
+  const dummySongs = Array.from({ length: 5 }, (_, i) =>
+    generateRandomSong(i + 6)
+  ); // IDs start from 6
+
+  // Update the store
+  setSongs(dummySongs);
 };

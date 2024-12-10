@@ -16,7 +16,8 @@ import {
 } from "@/components/ui/chart";
 import { useDateTimeRangeStore, useSongStreamStore } from "@/store/store";
 import { format } from "date-fns";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { generateDummySongStream } from "@/store/action";
 
 const chartConfig: ChartConfig = {
   views: { label: "Streams" },
@@ -26,6 +27,9 @@ const chartConfig: ChartConfig = {
 const BarGraph = () => {
   const { state: dateTimeRange } = useDateTimeRangeStore();
   const { state: streamsList } = useSongStreamStore();
+  useEffect(() => {
+    generateDummySongStream();
+  }, [dateTimeRange.endDate, dateTimeRange.startDate]);
 
   const formattedDateRange = useMemo(
     () =>

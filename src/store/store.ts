@@ -55,12 +55,12 @@ export const useDataMatrixStore = create<DataMatrixType>()((set) => ({
     activeUser: 0,
     totalStream: 0,
     revenue: {
-      totalRevenue: 475,
-      subscriptions: 200,
-      advertisements: 275,
+      totalRevenue: 0,
+      subscriptions: 0,
+      advertisements: 0,
     },
     topArtist: {
-      name: "#####",
+      name: "",
       totalStream: 0,
     },
   },
@@ -92,23 +92,7 @@ interface SongStreamType {
 }
 export const useSongStreamStore = create<SongStreamType>((set) => ({
   state: {
-    songs: [
-      {
-        id: 1,
-        songName: "Shape of You",
-        artist: "Ed Sheeran",
-        streams: "15000",
-      },
-      {
-        id: 2,
-        songName: "Blinding Lights",
-        artist: "The Weeknd",
-        streams: "20000",
-      },
-      { id: 3, songName: "Levitating", artist: "Dua Lipa", streams: "18000" },
-      { id: 4, songName: "Stay", artist: "Justin Bieber", streams: "17000" },
-      { id: 5, songName: "Bad Bunny", artist: "Bad Bunny", streams: "25000" },
-    ],
+    songs: [],
   },
   setSongs: (songs) => set((state) => ({ ...state, state: { songs } })),
 }));
