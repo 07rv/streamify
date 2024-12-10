@@ -7,8 +7,15 @@ import DateDateRange from "@/components/common/DateDateRange";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PageContainer from "@/lib/PageContainer";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession();
+
+  if (!session || !session.user) {
+    redirect("/");
+  }
   return (
     <PageContainer>
       <div className="space-y-2">
