@@ -4,6 +4,7 @@ import {
   useSongStore,
   useSongStreamStore,
   useUsersStore,
+  useDateTimeRangeStore,
 } from "./store";
 
 export const generateDummyMatrixData = async () => {
@@ -90,6 +91,7 @@ const generateRandomSong = (id: number) => {
 };
 
 const generateRandomSongList = (id: number) => {
+  const { state } = useDateTimeRangeStore.getState();
   const songNames = [
     "Shape of You",
     "Blinding Lights",
@@ -115,11 +117,14 @@ const generateRandomSongList = (id: number) => {
     "Ariana Grande",
     "Drake",
   ];
-
+  const startDate = new Date(state.startDate).getTime();
+  const endDate = new Date(state.endDate).getTime();
   // Generate a random date within the past month
-  const randomDate = new Date(
-    Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000
-  ).toISOString(); // Convert to ISO string
+
+  const randomTimestamp =
+    Math.floor(Math.random() * (endDate - startDate + 1)) + startDate;
+
+  const randomDate = new Date(randomTimestamp).toISOString(); // Convert to ISO string
 
   return {
     id: id.toString(), // Convert ID to string
@@ -133,7 +138,7 @@ const generateRandomSongList = (id: number) => {
 export const generateDummySongs = () => {
   const { setSongs } = useSongStore.getState();
 
-  const dummySongs = Array.from({ length: 10 }, (_, i) =>
+  const dummySongs = Array.from({ length: 20 }, (_, i) =>
     generateRandomSongList(i + 1)
   ); // Generate 10 songs
 

@@ -107,9 +107,20 @@ export const columns: ColumnDef<Song>[] = [
   },
   {
     accessorKey: "dateStreamed",
-    header: "Date Streamed",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="ml-1"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Streamed
+          <ArrowUpDown />
+        </Button>
+      );
+    },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("dateStreamed")}</div>
+      <div className="capitalize ml-5">{row.getValue("dateStreamed")}</div>
     ),
   },
 ];
@@ -145,6 +156,11 @@ const DateTable = () => {
       columnFilters,
       columnVisibility,
       rowSelection,
+    },
+    initialState: {
+      pagination: {
+        pageSize: 6,
+      },
     },
   });
 
