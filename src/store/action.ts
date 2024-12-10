@@ -8,7 +8,7 @@ import {
 } from "./store";
 
 export const generateDummyMatrixData = async () => {
-  const { state, setUsers, setTotalStream, setRevenue, setTopArtist } =
+  const { setUsers, setTotalStream, setRevenue, setTopArtist } =
     useDataMatrixStore.getState();
 
   // Generate dummy data
