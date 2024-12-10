@@ -43,7 +43,13 @@ export const authOptions: NextAuthOptions = {
         }
 
         if (email === "testlogin@gmail.com") {
-          return { id: "1", name: "Test login", email, image: "" };
+          return {
+            id: "1",
+            name: "Test login",
+            email,
+            image:
+              "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341",
+          };
         }
 
         throw new Error("Invalid email or password");

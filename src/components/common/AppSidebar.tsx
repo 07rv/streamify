@@ -42,7 +42,7 @@ import { navItems } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icons } from "@/lib/icons";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 export const company = {
   name: "Streamify",
@@ -52,6 +52,8 @@ export const company = {
 
 const AppSidebar = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const user = session?.user;
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -135,14 +137,14 @@ const AppSidebar = () => {
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
                   <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage src={""} alt={"Rohit"} />
+                    <AvatarImage src={user?.image} alt={user?.name} />
                     <AvatarFallback className="rounded-lg">
-                      {"Rohir".slice(0, 2)?.toUpperCase() || "CN"}
+                      {user?.name.slice(0, 2)?.toUpperCase() || "CN"}
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">{"Rohit"}</span>
-                    <span className="truncate text-xs">{"test@gmail.com"}</span>
+                    <span className="truncate font-semibold">{user?.name}</span>
+                    <span className="truncate text-xs">{user?.email}</span>
                   </div>
                   <ChevronsUpDown className="ml-auto size-4" />
                 </SidebarMenuButton>
@@ -156,16 +158,16 @@ const AppSidebar = () => {
                 <DropdownMenuLabel className="p-0 font-normal">
                   <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                     <Avatar className="h-8 w-8 rounded-lg">
-                      <AvatarImage src={""} alt={""} />
+                      <AvatarImage src={user?.image} alt={user?.name} />
                       <AvatarFallback className="rounded-lg">
-                        {"Rohit".slice(0, 2)?.toUpperCase() || "CN"}
+                        {user?.name.slice(0, 2)?.toUpperCase() || "CN"}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-semibold">{"Rohit"}</span>
-                      <span className="truncate text-xs">
-                        {"test@gmail.com"}
+                      <span className="truncate font-semibold">
+                        {user?.name}
                       </span>
+                      <span className="truncate text-xs">{user?.email}</span>
                     </div>
                   </div>
                 </DropdownMenuLabel>
