@@ -1,4 +1,10 @@
-import { useDataMatrixStore, useSongStreamStore, useUsersStore } from "./store";
+import { format } from "date-fns";
+import {
+  useDataMatrixStore,
+  useSongStore,
+  useSongStreamStore,
+  useUsersStore,
+} from "./store";
 
 export const generateDummyMatrixData = async () => {
   const { state, setUsers, setTotalStream, setRevenue, setTopArtist } =
@@ -81,4 +87,55 @@ const generateRandomSong = (id: number) => {
     artist: artists[Math.floor(Math.random() * artists.length)],
     streams: (Math.floor(Math.random() * 50000) + 10000).toString(), // Random streams between 10,000 and 60,000
   };
+};
+
+const generateRandomSongList = (id: number) => {
+  const songNames = [
+    "Shape of You",
+    "Blinding Lights",
+    "Levitating",
+    "Stay",
+    "Peaches",
+    "Save Your Tears",
+    "Good 4 U",
+    "MONTERO",
+    "Drivers License",
+    "Watermelon Sugar",
+  ];
+
+  const artists = [
+    "Ed Sheeran",
+    "The Weeknd",
+    "Dua Lipa",
+    "Justin Bieber",
+    "Doja Cat",
+    "Lil Nas X",
+    "Olivia Rodrigo",
+    "Harry Styles",
+    "Ariana Grande",
+    "Drake",
+  ];
+
+  // Generate a random date within the past month
+  const randomDate = new Date(
+    Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000
+  ).toISOString(); // Convert to ISO string
+
+  return {
+    id: id.toString(), // Convert ID to string
+    stream: Math.floor(Math.random() * 50000) + 10000, // Streams between 10,000 and 60,000
+    songName: songNames[Math.floor(Math.random() * songNames.length)],
+    artist: artists[Math.floor(Math.random() * artists.length)],
+    dateStreamed: format(randomDate, "dd/MM/yyyy"), // Random date within the past month
+  };
+};
+
+export const generateDummySongs = () => {
+  const { setSongs } = useSongStore.getState();
+
+  const dummySongs = Array.from({ length: 10 }, (_, i) =>
+    generateRandomSongList(i + 1)
+  ); // Generate 10 songs
+
+  setSongs(dummySongs); // Update the store with dummy songs
 };

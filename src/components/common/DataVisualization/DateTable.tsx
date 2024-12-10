@@ -38,7 +38,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useSongStore } from "@/store/store";
+import { useDateTimeRangeStore, useSongStore } from "@/store/store";
+
+import { generateDummySongs } from "@/store/action";
 
 export type Song = {
   id: string;
@@ -119,6 +121,10 @@ const DateTable = () => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+  const { state: dateTimeRange } = useDateTimeRangeStore();
+  React.useEffect(() => {
+    generateDummySongs();
+  }, [dateTimeRange.endDate, dateTimeRange.startDate]);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
