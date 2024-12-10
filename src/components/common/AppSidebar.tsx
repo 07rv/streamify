@@ -42,6 +42,7 @@ import { navItems } from "@/lib/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icons } from "@/lib/icons";
+import { signOut } from "next-auth/react";
 
 export const company = {
   name: "Streamify",
@@ -177,7 +178,11 @@ const AppSidebar = () => {
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
                   <LogOut />
                   Log out
                 </DropdownMenuItem>
