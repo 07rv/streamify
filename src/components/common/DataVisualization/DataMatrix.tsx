@@ -1,11 +1,17 @@
 "use client";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { useDataMatrixStore } from "@/store/store";
+import { generateDummyMatrixData } from "@/store/action";
+import { useDataMatrixStore, useDateTimeRangeStore } from "@/store/store";
 import { Activity, DollarSign, FolderOpenDot, UsersRound } from "lucide-react";
+import { useEffect } from "react";
 
 const DataMatrix = () => {
   const { state } = useDataMatrixStore();
+  const { state: dateTimeRange } = useDateTimeRangeStore();
+  useEffect(() => {
+    generateDummyMatrixData(); // Call the action to generate and set dummy data
+  }, [dateTimeRange.endDate, dateTimeRange.startDate]);
   return (
     <>
       <Card>
