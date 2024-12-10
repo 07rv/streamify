@@ -11,9 +11,12 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const User = () => {
+  const { data: session } = useSession();
+  console.log(session, 65432);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
