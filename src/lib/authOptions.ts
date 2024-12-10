@@ -1,7 +1,9 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-// Declare the session and JWT types
+import "next-auth";
+import "next-auth/jwt";
+
 declare module "next-auth" {
   interface Session {
     user: {
@@ -22,7 +24,6 @@ declare module "next-auth/jwt" {
   }
 }
 
-// Define the NextAuth configuration
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -31,11 +32,15 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text" },
       },
       async authorize(credentials) {
-        if (!credentials || !credentials.email) {
-          throw new Error("No credentials or email provided");
+        if (!credentials) {
+          throw new Error("No credentials provided");
         }
 
         const { email } = credentials;
+
+        if (!email) {
+          throw new Error("Email and password are required");
+        }
 
         if (email === "testlogin@gmail.com") {
           return { id: "1", name: "Test login", email, image: "" };
@@ -71,6 +76,3 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
-
-// Handle the NextAuth API routes correctly
-export { NextAuth as handler };
