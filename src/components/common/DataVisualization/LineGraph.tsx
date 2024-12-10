@@ -16,9 +16,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { format } from "date-fns";
 import { useDateTimeRangeStore, useUsersStore } from "@/store/store";
+
+import { generateDummyUserChartData } from "@/store/action";
 
 const chartConfig = {
   totalUser: {
@@ -34,6 +36,11 @@ const chartConfig = {
 const LineGraph = () => {
   const { state: chartData } = useUsersStore();
   const { state: dateTimeRange } = useDateTimeRangeStore();
+
+  useEffect(() => {
+    generateDummyUserChartData();
+  }, [dateTimeRange.endDate, dateTimeRange.startDate]);
+
   const formattedDateRange = useMemo(
     () =>
       `${format(dateTimeRange?.startDate, "dd MMM yyyy")} - ${format(
@@ -42,6 +49,7 @@ const LineGraph = () => {
       )}`,
     [dateTimeRange]
   );
+
   return (
     <Card>
       <CardHeader>

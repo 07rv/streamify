@@ -1,4 +1,4 @@
-import { useDataMatrixStore, useSongStreamStore } from "./store";
+import { useDataMatrixStore, useSongStreamStore, useUsersStore } from "./store";
 
 export const generateDummyMatrixData = async () => {
   const { state, setUsers, setTotalStream, setRevenue, setTopArtist } =
@@ -21,6 +21,33 @@ export const generateDummyMatrixData = async () => {
   setTotalStream(totalStream);
   setRevenue({ totalRevenue, subscriptions, advertisements });
   setTopArtist(topArtist);
+};
+
+export const generateDummySongStream = async () => {
+  const { setSongs } = useSongStreamStore.getState();
+
+  const dummySongs = Array.from({ length: 5 }, (_, i) =>
+    generateRandomSong(i + 6)
+  );
+  setSongs(dummySongs);
+};
+
+export const generateDummyUserChartData = async () => {
+  const { setChartData } = useUsersStore.getState();
+
+  const dummyData = Array.from({ length: 5 }, (_, i) => {
+    const totalUser = Math.floor(Math.random() * 10000) + 500; // Random total users between 500 and 10,500
+    const activeUser = Math.floor(Math.random() * totalUser); // Random active users less than totalUser
+
+    return {
+      id: i + 1,
+      labels: `Label ${i + 1}`,
+      totalUser,
+      activeUser,
+    };
+  });
+
+  setChartData(dummyData);
 };
 
 const generateRandomSong = (id: number) => {
@@ -54,16 +81,4 @@ const generateRandomSong = (id: number) => {
     artist: artists[Math.floor(Math.random() * artists.length)],
     streams: (Math.floor(Math.random() * 50000) + 10000).toString(), // Random streams between 10,000 and 60,000
   };
-};
-
-export const generateDummySongStream = async () => {
-  const { setSongs } = useSongStreamStore.getState();
-
-  // Generate random songs
-  const dummySongs = Array.from({ length: 5 }, (_, i) =>
-    generateRandomSong(i + 6)
-  ); // IDs start from 6
-
-  // Update the store
-  setSongs(dummySongs);
 };

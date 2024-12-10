@@ -117,14 +117,7 @@ interface UserType {
 
 export const useUsersStore = create<UserType>((set) => ({
   state: {
-    chartData: [
-      { id: 1, labels: "January", totalUser: 186, activeUser: 80 },
-      { id: 2, labels: "February", totalUser: 305, activeUser: 200 },
-      { id: 3, labels: "March", totalUser: 237, activeUser: 120 },
-      { id: 4, labels: "April", totalUser: 73, activeUser: 190 },
-      { id: 5, labels: "May", totalUser: 209, activeUser: 130 },
-      { id: 6, labels: "June", totalUser: 214, activeUser: 140 },
-    ],
+    chartData: [],
   },
 
   setChartData: (data) =>
