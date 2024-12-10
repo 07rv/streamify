@@ -64,14 +64,43 @@ export const columns: ColumnDef<Song>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="capitalize ml-4">{row.getValue("songName")}</div>
+      <div className="capitalize ml-5">{row.getValue("songName")}</div>
     ),
   },
   {
     accessorKey: "artist",
-    header: "Artist",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="ml-1"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Artist
+          <ArrowUpDown />
+        </Button>
+      );
+    },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("artist")}</div>
+      <div className="capitalize ml-5">{row.getValue("artist")}</div>
+    ),
+  },
+  {
+    accessorKey: "stream",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          className="ml-1"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Stream
+          <ArrowUpDown />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize ml-5">{row.getValue("stream")}</div>
     ),
   },
   {
@@ -79,15 +108,6 @@ export const columns: ColumnDef<Song>[] = [
     header: "Date Streamed",
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("dateStreamed")}</div>
-    ),
-  },
-  {
-    accessorKey: "stream",
-    header: () => <div className="text-right">Stream</div>,
-    cell: ({ row }) => (
-      <div className="lowercase text-right font-medium">
-        {row.getValue("stream")}
-      </div>
     ),
   },
 ];

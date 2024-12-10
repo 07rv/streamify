@@ -15,7 +15,7 @@ const Login = () => {
       router.push("/dashboard");
     }
   });
-
+  const [isLoading, setIsLoading] = useState(false);
   const [inputField, setInputField] = useState({
     email: "testlogin@gmail.com",
   });
@@ -54,16 +54,23 @@ const Login = () => {
   };
 
   const submitButton = async () => {
-    if (!checkAndSetValidationsErrors()) {
-      const status = await signIn("credentials", {
-        redirect: false,
-        email: inputField.email,
-        callbackUrl: "/dashboard",
-      });
-      if (status && status.ok && status.url) {
-        router.push(status.url);
-      } else {
+    setIsLoading(true);
+    try {
+      if (!checkAndSetValidationsErrors()) {
+        const status = await signIn("credentials", {
+          redirect: false,
+          email: inputField.email,
+          callbackUrl: "/dashboard",
+        });
+        if (status && status.ok && status.url) {
+          setIsLoading(false);
+          router.push(status.url);
+        } else {
+        }
       }
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -103,6 +110,7 @@ const Login = () => {
           </div>
           <div className="mt-5">
             <button
+              disabled={isLoading}
               onClick={submitButton}
               className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
             >
