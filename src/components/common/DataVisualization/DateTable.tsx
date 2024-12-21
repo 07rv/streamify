@@ -194,6 +194,9 @@ const DateTable = () => {
     },
   });
 
+  const downloadData = async () => {
+    window.alert("Data Download from the api");
+  };
   return (
     <Card className="col-span-4 md:col-span-3">
       <CardHeader className="flex">
@@ -202,7 +205,11 @@ const DateTable = () => {
             <CardTitle>Recent Songs</CardTitle>
             <CardDescription>Total: {data.length}</CardDescription>
           </div>
-          <Button variant="outline" className="ml-auto m-2">
+          <Button
+            onClick={() => downloadData()}
+            variant="outline"
+            className="ml-auto m-2"
+          >
             Export <Download />
           </Button>
         </div>
