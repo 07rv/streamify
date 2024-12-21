@@ -1,3 +1,5 @@
+"use client";
+
 import BarGraph from "@/components/common/DataVisualization/BarGraph";
 import DataMatrix from "@/components/common/DataVisualization/DataMatrix";
 import DateTable from "@/components/common/DataVisualization/DateTable";
@@ -7,14 +9,17 @@ import DateDateRange from "@/components/common/DateDateRange";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PageContainer from "@/lib/PageContainer";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import { useSetToggle } from "@/store/store";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-export default async function Home() {
-  const session = await getServerSession();
+export default function Home() {
+  const router = useRouter();
+  const { state, setTabState } = useSetToggle();
+  const session = useSession();
 
-  if (!session || !session.user) {
-    redirect("/");
+  if (!session?.data?.user) {
+    router.push("/");
   }
   return (
     <PageContainer>
@@ -24,17 +29,34 @@ export default async function Home() {
           <DateDateRange />
         </div>
 
-        <Tabs defaultValue="overview" className="space-y-4">
+        <Tabs
+          defaultValue="overview"
+          value={state.tabState ?? "overview"}
+          className="space-y-4"
+        >
           <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="analytics" disabled>
+            <TabsTrigger
+              onClick={() => setTabState("overview")}
+              value="overview"
+            >
+              Overview
+            </TabsTrigger>
+            <TabsTrigger
+              onClick={() => setTabState("analytics")}
+              value="analytics"
+            >
               Analytics
             </TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <DataMatrix />
+              <div className="col-span-4">
+                <DateTable />
+              </div>
             </div>
+          </TabsContent>
+          <TabsContent value="analytics" className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
               <div className="col-span-4">
                 <BarGraph />
@@ -44,9 +66,6 @@ export default async function Home() {
               </div>
               <div className="col-span-4">
                 <LineGraph />
-              </div>
-              <div className="col-span-4 md:col-span-3">
-                <DateTable />
               </div>
             </div>
           </TabsContent>

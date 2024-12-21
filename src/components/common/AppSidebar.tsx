@@ -43,6 +43,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icons } from "@/lib/icons";
 import { signOut, useSession } from "next-auth/react";
+import { useSetToggle } from "@/store/store";
 
 export const company = {
   name: "Streamify",
@@ -51,6 +52,7 @@ export const company = {
 };
 
 const AppSidebar = () => {
+  const { setTabState } = useSetToggle();
   const pathname = usePathname();
   const { data: session } = useSession();
   const user = session?.user;
@@ -99,7 +101,14 @@ const AppSidebar = () => {
                               asChild
                               isActive={pathname === subItem.url}
                             >
-                              <Link href={subItem.url}>
+                              <Link
+                                href={subItem.url}
+                                onClick={() => {
+                                  if (item.title == "Dashboard") {
+                                    setTabState(subItem.title.toLowerCase());
+                                  }
+                                }}
+                              >
                                 <span>{subItem.title}</span>
                               </Link>
                             </SidebarMenuSubButton>

@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { format, subDays } from "date-fns";
+import { devtools, persist } from "zustand/middleware";
 
 interface DateTimeRangeType {
   state: {
@@ -189,3 +190,21 @@ export const useSongStore = create<SongStore>((set) => ({
       },
     })),
 }));
+
+interface SetToggle {
+  state: { tabState: string };
+  setTabState: (tabState: string) => void;
+}
+
+export const useSetToggle = create<SetToggle>()(
+  devtools(
+    persist(
+      (set) => ({
+        state: { tabState: "overview" },
+        setTabState: (tabState) =>
+          set(() => ({ state: { tabState: tabState } })),
+      }),
+      { name: "toggleState" }
+    )
+  )
+);

@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -61,7 +61,13 @@ export const columns: ColumnDef<Song>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Song Name
-          <ArrowUpDown />
+          {column.getIsSorted() == false ? (
+            <ArrowUpDown />
+          ) : column.getIsSorted() == "asc" ? (
+            <ArrowUp />
+          ) : (
+            <ArrowDown />
+          )}
         </Button>
       );
     },
@@ -79,7 +85,13 @@ export const columns: ColumnDef<Song>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Artist
-          <ArrowUpDown />
+          {column.getIsSorted() == false ? (
+            <ArrowUpDown />
+          ) : column.getIsSorted() == "asc" ? (
+            <ArrowUp />
+          ) : (
+            <ArrowDown />
+          )}
         </Button>
       );
     },
@@ -97,7 +109,13 @@ export const columns: ColumnDef<Song>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Stream
-          <ArrowUpDown />
+          {column.getIsSorted() == false ? (
+            <ArrowUpDown />
+          ) : column.getIsSorted() == "asc" ? (
+            <ArrowUp />
+          ) : (
+            <ArrowDown />
+          )}
         </Button>
       );
     },
@@ -115,7 +133,13 @@ export const columns: ColumnDef<Song>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Streamed
-          <ArrowUpDown />
+          {column.getIsSorted() == false ? (
+            <ArrowUpDown />
+          ) : column.getIsSorted() == "asc" ? (
+            <ArrowUp />
+          ) : (
+            <ArrowDown />
+          )}
         </Button>
       );
     },
