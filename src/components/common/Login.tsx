@@ -113,7 +113,11 @@ const Login = () => {
             <button
               disabled={isLoading}
               onClick={submitButton}
-              className="py-1 px-8 bg-blue-500 hover:bg-blue-800 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none"
+              className={`py-1 px-8 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg select-none ${
+                isLoading
+                  ? "cursor-wait bg-gray-500"
+                  : "cursor-pointer bg-blue-500 hover:bg-blue-800"
+              }`}
             >
               Login
             </button>
