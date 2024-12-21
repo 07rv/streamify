@@ -13,7 +13,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronDown } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUp,
+  ArrowUpDown,
+  ChevronDown,
+  Download,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -190,9 +196,16 @@ const DateTable = () => {
 
   return (
     <Card className="col-span-4 md:col-span-3">
-      <CardHeader>
-        <CardTitle>Recent Songs</CardTitle>
-        <CardDescription>Total: {data.length}</CardDescription>
+      <CardHeader className="flex">
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2">
+            <CardTitle>Recent Songs</CardTitle>
+            <CardDescription>Total: {data.length}</CardDescription>
+          </div>
+          <Button variant="outline" className="ml-auto m-2">
+            Export <Download />
+          </Button>
+        </div>
       </CardHeader>
       <CardContent>
         <div className="w-full">
